@@ -31,7 +31,7 @@ def create_purchase(request):
         EmiModel.objects.create(
             user_id=user,
             purchase_id = purchase,
-            duration = months-1,
+            duration_in_months = months-1,
         )
 
     CreditDetailsModel.objects.filter(user_id=user).update(credit_limit=F('credit_limit') - int(ammount))
