@@ -2,7 +2,7 @@ from django.db import models
 from .user import UserModel
 
 class PurchaseModel(models.Model):
-    user_id = models.ForeignKey(UserModel, on_delete=models.CASCADE, null=True)
+    user_id = models.ForeignKey(UserModel, on_delete=models.CASCADE, null=False)
     purchase_id = models.BigAutoField(primary_key=True)
     ammount = models.IntegerField()
     created_on = models.DateTimeField(auto_now_add=True)
