@@ -1,15 +1,9 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers.user_serializer import UserSerializer
-from .models import PurchaseModel, UserModel, CreditDetailsModel
+from ..models import PurchaseModel, UserModel, CreditDetailsModel
 from django.shortcuts import get_object_or_404
-from rest_framework import viewsets
 from django.db.models import F
-
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = UserModel.objects.all()
-    serializer_class = UserSerializer
 
 @api_view(['POST'])
 def create_purchase(request):
@@ -31,7 +25,7 @@ def create_purchase(request):
     )
 
     CreditDetailsModel.objects.filter(user_id=user).update(credit_limit=F('credit_limit') - int(ammount))
-
+    
     return Response({
         "message": "Purchase created successfully.",
         "purchase_id": purchase.purchase_id,
